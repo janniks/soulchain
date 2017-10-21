@@ -1,5 +1,221 @@
-<% if (!user) { %>
-	<p>Welcome! Please <a href="/login">log in</a>.</p>
-<% } else { %>
-	<p>Hello, <%= user.username %>. View your <a href="/profile">profile</a>.</p>
-<% } %>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.4/jquery.fullpage.min.css" />
+	<link href="https://fonts.googleapis.com/css?family=Rubik:700" rel="stylesheet">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.4/jquery.fullpage.min.js"></script>
+	<title>soulchain</title>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#fullpage').fullpage();
+		});
+	</script>
+</head>
+<body>
+	<div id="fullpage">
+		<div class="section landing">
+			<div class="cube-container">
+				<div class="cube">
+					<div class="face front"></div>
+					<div class="face back"></div>
+					<div class="face left"></div>
+					<div class="face right"></div>
+					<div class="face top"></div>
+					<div class="face bottom"></div>
+				</div>
+			</div>
+			<h1 class="title">soulchain</h1>
+			<h2 class="subtitle">A social blockchain, built for the future.</h2>
+			<div class="wp">Read the <a href="https://static6.depositphotos.com/1046751/564/i/950/depositphotos_5646928-stock-photo-two-hands-are-holding-up.jpg">Whitepaper</a></div>
+		</div>
+		<div class="section about">
+			<div class="container">
+				<div class="row advisor-title">
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
+						<h1>Meet the future.</h1>
+						<p>soulchain is a decentralized platform that runs social contracts: people that live free without any possibility of sadnes, censorship, fraud or third party interference.</p>
+
+						<p>People build on a custom blockchain, an enormously powerful shared global infrastructure that can move emotions and represent the meaning of life.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3 offset-md-3 advisor">
+						<div class="advisor-stallman"></div>
+						<p class="advisor-name">Ronald McDonald</p>
+						<p class="advisor-text">Social Advisor</p>
+					</div>
+					<div class="col-md-3 advisor">
+						<div class="advisor-woman"></div>
+						<p class="advisor-name">errn0</p>
+						<p class="advisor-text">Director Engineering Advisory Board</p>
+					</div>
+					<div class="col-md-3 advisor">
+						<div class="advisor-stopcat"></div>
+						<p class="advisor-name">Stop Cat</p>
+						<p class="advisor-text">Senior Inspiration Evangelist</p>
+					</div>
+					<div class="col-md-3 advisor">
+						<div class="advisor-hacker"></div>
+						<p class="advisor-name">Doctor Anonym</p>
+						<p class="advisor-text">Director Security Advisory Commitee</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="section join">
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6 join-text">
+					<h1>Join us on this exclusive journey.</h1>
+				</div>
+			</div>
+			<div class="row join-title">
+				<div class="col-md-5"></div>
+				<a href="/login/facebook" class="col-md-2 join-button"><div>
+					<h1>Join now!</h1>
+				</div></a>
+			</div>
+		</div>
+		<div class="section chain">
+<ul class='-center'>
+  
+  <% for(var i=0; i < users.length; i++) { %>
+   <li>
+       <div class='w'>
+         <div class='f'>
+           <svg viewBox='0 0 180 180'>
+             <image height='100%' preserveAspectRatio='xMidYMid slice' width='100%' xlink:href='http://graph.facebook.com/<%= users[i].profile.id %>/picture?type=large'></image>
+           </svg>
+         </div>
+         <div class='b'>
+           <h3>
+             <%= users[i].profile.displayName %>
+           </h3>
+         </div>
+       </div>
+     </li>
+  <% } %>
+    
+</ul>
+
+<script type="text/javascript">
+	'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+// - Noel Delgado | @pixelia_me
+
+var DAH = function () {
+  function DAH(nodes) {
+    var _this = this;
+
+    _classCallCheck(this, DAH);
+
+    this.nodes = [];
+
+    Array.prototype.slice.call(nodes, 0).forEach(function (node) {
+      _this.nodes.push(new Node(node));
+    });
+
+    this._bindEvents();
+  }
+
+  DAH.prototype._bindEvents = function _bindEvents() {
+    var _this2 = this;
+
+    ['_resizeHandler'].forEach(function (fn) {
+      return _this2[fn] = _this2[fn].bind(_this2);
+    });
+    window.addEventListener('resize', this._resizeHandler, false);
+  };
+
+  DAH.prototype._resizeHandler = function _resizeHandler() {
+    this.nodes.forEach(function (node) {
+      return node.update();
+    });
+  };
+
+  return DAH;
+}();
+
+var Node = function () {
+  function Node(node) {
+    _classCallCheck(this, Node);
+
+    this.element = node;
+    this._bindEvents().update();
+  }
+
+  Node.prototype.update = function update() {
+    // const bcr = this.element.getBoundingClientRect();
+    // this.l = bcr.left;
+    // this.t = bcr.top;
+    this.w = this.element.offsetWidth;
+    this.h = this.element.offsetHeight;
+    this.l = this.element.offsetLeft;
+    this.t = this.element.offsetTop;
+  };
+
+  Node.prototype._bindEvents = function _bindEvents() {
+    var _this3 = this;
+
+    ['_mouseEnterHandler', '_mouseOutHandler'].forEach(function (fn) {
+      return _this3[fn] = _this3[fn].bind(_this3);
+    });
+    this.element.addEventListener('mouseenter', this._mouseEnterHandler, false);
+    this.element.addEventListener('mouseout', this._mouseOutHandler, false);
+    return this;
+  };
+
+  Node.prototype._mouseEnterHandler = function _mouseEnterHandler(ev) {
+    this._addClass(ev, 'in');
+  };
+
+  Node.prototype._mouseOutHandler = function _mouseOutHandler(ev) {
+    this._addClass(ev, 'out');
+  };
+
+  Node.prototype._addClass = function _addClass(ev, state) {
+    var direction = this._getDirection(ev);
+    var class_suffix = '';
+
+    switch (direction) {
+      case 0:
+        class_suffix = '-top';break;
+      case 1:
+        class_suffix = '-right';break;
+      case 2:
+        class_suffix = '-bottom';break;
+      case 3:
+        class_suffix = '-left';break;
+    }
+
+    this.element.className = '';
+    this.element.classList.add(state + class_suffix);
+  };
+
+  Node.prototype._getDirection = function _getDirection(ev) {
+    var w = this.w,
+        h = this.h,
+        x = ev.pageX - this.l - w / 2 * (w > h ? h / w : 1),
+        y = ev.pageY - this.t - h / 2 * (h > w ? w / h : 1),
+        d = Math.round(Math.atan2(y, x) / 1.57079633 + 5) % 4;
+
+    return d;
+  };
+
+  return Node;
+}();
+
+new DAH(document.querySelectorAll('li'));
+</script>
+		</div>
+	</div>
+</body>
+</html>

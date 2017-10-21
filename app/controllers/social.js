@@ -43,7 +43,15 @@ router.use(passport.session());
 
 //### Handlers #################################################################
 router.get('/', function (req, res) {
-  return res.render('home', { user: req.user });
+  ibk.Models.Profile.find({ }).exec(function(error, profiles) {
+    if (error) {
+      return res.render('home');
+    }
+
+    return res.render('home', {
+      users: profiles
+    });    
+  });
 });
 
 router.get('/login/facebook', passport.authenticate('facebook'));
