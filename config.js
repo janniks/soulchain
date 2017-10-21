@@ -14,5 +14,14 @@ module.exports = {
 		"use": [
 			require('cors')()
 		]
+	},
+
+	//## environments ##########################################################
+	"environments": {
+		"production": {
+			"custom": {
+				"PLACEHOLDER": "placeholder"
+			}
+		}
 	}
 };
