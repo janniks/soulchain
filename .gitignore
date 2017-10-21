@@ -1,4 +1,5 @@
 #### Custom ignores ####
+*package-lock.json
 
 #### https://www.gitignore.io/api/node,macos ####
 ### macOS ###
