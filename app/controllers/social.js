@@ -12,18 +12,28 @@ passport.use(new Strategy({
     callbackURL: 'http://localhost:8080/login/facebook/return'
   },
   function(accessToken, refreshToken, profile, cb) {
-    log.info('profile', profile);
+    var p = new ibk.Models.Profile({
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+      profile: profile
+    });
+    
+    p.save()
+    .then(function (profile) {
+      log.info('Successfully saved profile.');
+    })
+    .catch(function (error) {
+      log.error('Failed to save profile. Maybe the profile already exists.');
+    });
     return cb(null, profile);
   }
 ));
 
 passport.serializeUser(function(user, cb) {
-  log.info('user', user);
   cb(null, user);
 });
 
 passport.deserializeUser(function(obj, cb) {
-  log.info('obj', obj);
   cb(null, obj);
 });
 
@@ -32,22 +42,14 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 //### Handlers #################################################################
-router.get('/login', function(req, res){
-	res.render('login');
+router.get('/', function (req, res) {
+  return res.render('home', { user: req.user });
 });
 
 router.get('/login/facebook', passport.authenticate('facebook'));
 
-router.get('/login/facebook/return', passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
+router.get('/login/facebook/return', passport.authenticate('facebook', { failureRedirect: '/' }), function(req, res) {
 	res.redirect('/');
-});
-
-router.get('/profile', require('connect-ensure-login').ensureLoggedIn(), function(req, res){
-	res.render('profile', { user: req.user });
-});
-
-router.get('/', function (req, res) {
-  return res.render('home', { user: req.user });
 });
 
 // Export router
