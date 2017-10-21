@@ -5,11 +5,11 @@ var router = ibk.router();
 //## Home ######################################################################
 
 //### Routes ###################################################################
-router.get( '/', home);
+router.get('/', home);
 
 //### Handlers #################################################################
 function home(req, res) {
-	return res.render('home');
+	return res.render('home', { user: req.user });
 } 
 
 // Export router

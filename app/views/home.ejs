@@ -1,15 +1,5 @@
-<html>
-	<head>
-		<title><%= locals.title ? title + ' | placeholder': 'placeholder' %></title>
-		
-		<meta charset="utf-8">
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-	</head>
-	<body>
-		<div>Hello World!</div>
-	</body>
-</html>
+<% if (!user) { %>
+	<p>Welcome! Please <a href="/login">log in</a>.</p>
+<% } else { %>
+	<p>Hello, <%= user.username %>. View your <a href="/profile">profile</a>.</p>
+<% } %>
