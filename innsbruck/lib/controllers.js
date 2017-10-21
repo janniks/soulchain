@@ -1,6 +1,8 @@
 // Routes //////////////////////////////////////////////////////////////////////
 // globals -> web -> session -> views -> middleware -> [controllers] -> index
 
+//> todo: add error handling and error messages for faulty controllers
+
 var innsbruck = require('./middleware.js');
 
 const controllersPath = ibk.methods.path('app/controllers');

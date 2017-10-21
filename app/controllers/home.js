@@ -9,5 +9,8 @@ router.get( '/', home);
 
 //### Handlers #################################################################
 function home(req, res) {
-	return home('home');
+	return res.render('home');
 } 
+
+// Export router
+module.exports = router;
