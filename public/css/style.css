@@ -7,6 +7,11 @@
 	text-shadow: 0 5px 18px rgba(0,0,0,0.6);
 }
 
+.chain-img {
+  background-image: url("../img/chain.jpg");
+  z-index: -1000;
+}
+
 .subtitle {
 	font-family: 'Rubik', sans-serif;
 	font-size: 25px;
@@ -14,6 +19,24 @@
 	margin-top: 0px;
 	text-align: center;
 	text-shadow: 0 3px 14px rgba(0,0,0,0.6);
+}
+
+.wp {
+  color: white;
+  text-align: center;
+}
+
+.join-button {
+  border-radius: 20px;
+  font-size: 50px;
+  color: white;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.6);
+  background-color: black;
+}
+
+.join-text {
+  color: white;
+  text-align: center;
 }
 
 .landing {
@@ -210,6 +233,7 @@
 @import url(https://fonts.googleapis.com/css?family=Sahitya);
 
 li {
+  z-index: 1000;
   margin: 5px;
   position: relative;
   width: 180px;
@@ -461,6 +485,7 @@ ul {
   max-width: 760px;
   margin: 0 auto;
   list-style: none
+  z-index: 1001;
 }
 
 ul::after{
