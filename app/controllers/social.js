@@ -6,12 +6,6 @@ var Strategy = require('passport-facebook').Strategy;
 //# API ########################################################################
 
 //## Social ####################################################################
-
-//### Routes ###################################################################
-router.use(passport.initialize());
-router.use(passport.session());
-
-//### Handlers #################################################################
 passport.use(new Strategy({
     clientID: process.env.FACEBOOK_ID,
     clientSecret: process.env.FACEBOOK_SECRET,
@@ -20,7 +14,8 @@ passport.use(new Strategy({
   function(accessToken, refreshToken, profile, cb) {
     log.info('profile', profile);
     return cb(null, profile);
-  }));
+  }
+));
 
 passport.serializeUser(function(user, cb) {
   log.info('user', user);
@@ -32,6 +27,11 @@ passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
 
+//### Routes ###################################################################
+router.use(passport.initialize());
+router.use(passport.session());
+
+//### Handlers #################################################################
 router.get('/login', function(req, res){
 	res.render('login');
 });
@@ -44,6 +44,10 @@ router.get('/login/facebook/return', passport.authenticate('facebook', { failure
 
 router.get('/profile', require('connect-ensure-login').ensureLoggedIn(), function(req, res){
 	res.render('profile', { user: req.user });
+});
+
+router.get('/', function (req, res) {
+  return res.render('home', { user: req.user });
 });
 
 // Export router
